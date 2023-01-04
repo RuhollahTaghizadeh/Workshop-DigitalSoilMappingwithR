@@ -4,14 +4,19 @@
 	<img title="R" alt="R" src="image/01.png" height="400" />
 </p>
 
-### 1.How to preprocess the geodatabases, remote sensing, and digital elevation models
 
-### 2.How to extract spatial information and predict soil properties using simple models
+### 1. An introduction of Digital Soil Mapping
 
-### 3.How to extract spatial information and predict soil properties using advanced machine learning models
+### 2. R basics
 
-### 4.How to use geostatistics for mapping soil properties
+### 3. How to preprocess the geodatabases, remote sensing, and digital elevation models
 
-### 5.Advanced topics of digital soil mapping
+### 4. How to extract spatial information and predict soil properties using simple models
 
-### 6.An overview of Digital soil mapping
+### 5. How to extract spatial information and predict soil properties using advanced machine learning models
+
+### 6. How to use geostatistics for mapping soil properties
+
+### 7. Advanced topics of digital soil mapping
+
+### 8. An overview of Digital soil mapping
