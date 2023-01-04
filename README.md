@@ -1,6 +1,9 @@
 # Workshop Digital Soil Mapping in R
 ## Materials and R codes for digital soil mapping workshop which was held at the Iranian Soil & Water Research Institute. 
- 
+<p align="center">
+	<img title="R" alt="R" src="image/01.png" height="400" />
+</p>
+
 ### 1.How to preprocess the geodatabases, remote sensing, and digital elevation models
 
 ### 2.How to extract spatial information and predict soil properties using simple models
