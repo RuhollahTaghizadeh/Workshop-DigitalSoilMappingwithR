@@ -1,0 +1,94 @@
+### Script with example code to test installation of R packages and associated software (Google Earth, SAGA GIS, GDAL)
+-----------------------------------------------------------
+
+  
+## Install packages (skip if you have already run these lines)
+#------------------------------
+
+list.of.packages <- c("sp", "rgdal", "gstat", "rgeos", "GSIF", "plotKML", "caret", "plyr", "raster", "randomForest", "ggplot2", "e1071", "leaflet", "htmlwidgets", "MASS", "dplyr")
+
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+
+if(length(new.packages)) install.packages(new.packages)
+
+
+## TEST R - example 1
+#------------------------------
+
+library(GSIF)
+library(plotKML)
+library(sp)
+library(plyr)
+library(gstat)
+library(randomForest)
+demo(meuse, echo=FALSE)
+omm <- fit.gstatModel(meuse, om~dist+ffreq, meuse.grid, family = gaussian(log))
+om.rk <- predict(omm, meuse.grid)
+plot(om.rk)
+
+
+## TEST R - example 2
+#------------------------------
+
+library(sp)
+library(gstat)
+data(meuse)
+coordinates(meuse) = ~x+y
+data(meuse.grid)
+gridded(meuse.grid) = ~x+y
+m <- vgm(.59, "Sph", 874, .04)
+# ordinary kriging:
+x <- krige(log(zinc)~1, meuse, meuse.grid, model = m)
+spplot(x["var1.pred"], main = "ordinary kriging predictions")
+
+
+## TEST R - Google Earth
+#------------------------------
+
+plotKML(om.rk)
+
+
+## TEST R - SAGA
+#------------------------------
+
+# define path to SAGA command line
+saga_cmd = "C:/Progra~1/SAGA-GIS/saga_cmd.exe"
+
+# load packages
+library(GSIF)
+library(rgdal)
+library(raster)
+library(plotKML)
+
+# load grid (included in the plotKML package)
+data("eberg_grid")
+gridded(eberg_grid) <- ~x+y
+proj4string(eberg_grid) <- CRS("+init=epsg:31467")
+
+# write grid to GeoTiff
+writeGDAL(eberg_grid["DEMSRT6"], "DEMSRT6.sdat", "SAGA")
+
+# create a hillshade raster from the DEM
+system(paste(saga_cmd, 'ta_lighting 0 -ELEVATION "DEMSRT6.sgrd" -SHADE "hillshade.sgrd" -EXAGGERATION 2'))
+
+
+## TEST R - GDAL
+#------------------------------
+
+# define paths to gdal functions
+if(.Platform$OS.type == "windows"){
+  gdal.dir <- shortPathName("C:/Program files/GDAL")
+  gdal_translate <- paste0(gdal.dir, "/gdal_translate.exe")
+  gdalwarp <- paste0(gdal.dir, "/gdalwarp.exe")
+} else {
+  gdal_translate = "gdal_translate"
+  gdalwarp = "gdalwarp"
+}
+
+# reproject to WGS84
+system(paste(gdalwarp, ' DEMSRT6.sdat DEMSRT6_ll.tif -t_srs \"+proj=longlat +datum=WGS84\"'))
+
+# plot map
+plot(raster("DEMSRT6_ll.tif"))
+
+# end of script;
