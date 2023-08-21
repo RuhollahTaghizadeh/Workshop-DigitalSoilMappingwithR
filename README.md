@@ -1,4 +1,4 @@
-# Workshop Digital Soil Mapping in R Programming 
+# Workshop Digital Soil Mapping in R 
 ## Materials and R codes for digital soil mapping workshop which was held at the Iranian Soil & Water Research Institute. 
 <p align="center">
 	<img title="R" alt="R" src="image/01.png" height="400" />
