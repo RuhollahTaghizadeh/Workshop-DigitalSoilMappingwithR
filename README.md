@@ -5,7 +5,7 @@
 </p>
 
 
-### 1. An introduction of Digital Soil Mapping
+### 1. An Introduction of Digital Soil Mapping
 
 ### 2. R basics
 
