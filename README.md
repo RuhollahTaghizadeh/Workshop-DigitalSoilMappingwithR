@@ -19,4 +19,4 @@
 
 ### 7. Advanced topics of digital soil mapping
 
-### 8. An overview of Digital soil mapping
+### 8. An overview of Digital soil mapping 
